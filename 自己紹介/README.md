@@ -75,16 +75,9 @@ Android/iOS アプリエンジニア
 
 ## ソシャゲ
 
-- 遊戯王デュエルリンクス
-- 駅メモ
-- どうぶつの森 ポケットキャンプ
-- パズドラ
-- モンスト
-- ログレス
-- ポケマス
-- DQウォーク
+![遊戯王デュエルリンクス](./assets/duel_links.png)![駅メモ](./assets/ekimemo.png)![どうぶつの森 ポケットキャンプ](./assets/pokemori.png)![パズドラ](./assets/pad.png)![モンスト](./assets/monst.png)![ログレス](./assets/logres.png)![ポケマス](./assets/pokemas.png)![DQウォーク](./assets/dqw.png)
 
-*2020/01 時点*
+.bottom.right[*2020/01 時点*]
 
 ---
 

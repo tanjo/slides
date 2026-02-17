@@ -86,4 +86,8 @@ Swift にはないヘッダーファイルの扱いに注意すれば、Objectiv
 
 ---
 
-## まとめ
+## おわりに
+
+- Swift Package Manager は、Swift で書かれたコードを管理するためのツールですが、Objective-C で書かれたコードも Swift Package Manager を使用して管理することができる。
+- ヘッダーファイルの扱いに注意すれば、Objective-C で書かれたコードも Swift Package Manager を使用して管理することができる。
+

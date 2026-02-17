@@ -8,6 +8,8 @@ class: center, middle
 
 CocoaPods のサポートが2026年12月2日に事実上終了することが[発表](https://blog.cocoapods.org/CocoaPods-Specs-Repo/)され、Swift Package Manager を使用してライブラリを管理することが増えてきました。
 
+---
+
 ## Swift Package Manager
 
 Swift Package Manager は、Apple が開発した、Swift のパッケージ管理ツール。
@@ -26,7 +28,7 @@ Objective-C は、Apple が開発した、C 言語を拡張したプログラミ
 
 Swift Package Manager は、Swift で書かれたコードを管理するためのツールですが、Objective-C で書かれたコードも Swift Package Manager を使用して管理することができる。
 
---- 
+---
 
 ## Package.swift ①
 

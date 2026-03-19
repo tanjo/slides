@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 class Server {
-    constructor(port) {
+    constructor(port = 50000) {
         this.port = port;
     }
 

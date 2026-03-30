@@ -2,3 +2,4 @@
 
 Gemini 製
 
+[スライド](./docs/index.html)

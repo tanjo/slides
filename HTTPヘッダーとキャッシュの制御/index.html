@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>HTTPヘッダーとキャッシュの高度な制御</title>
+    <style type="text/css">
+      /* 万人受けする日本語フォント (Noto Sans JP) を採用 */
+      @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&display=swap');
+
+      body {
+        font-family: 'Noto Sans JP', sans-serif;
+        color: #333;
+        line-height: 1.6;
+        background-color: #f4f7f6; /* 薄いグレーの背景 */
+      }
+      h1, h2, h3 {
+        font-family: 'Noto Sans JP', sans-serif;
+        font-weight: 700;
+        color: #2c3e50; /* 深い青 */
+        margin-top: 0;
+      }
+      h1 { font-size: 2.5em; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+      h2 { font-size: 2em; margin-top: 1.5em; color: #34495e; }
+      h3 { font-size: 1.5em; color: #7f8c8d; }
+
+      .remark-slide-content {
+        font-size: 1.2em; /* 全体的に少し大きく */
+        padding: 2em 4em;
+        background-color: #fff;
+        border-radius: 8px; /* 角を丸く */
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* 軽い影 */
+      }
+      
+      .remark-slide-content h1 { margin-bottom: 40px; }
+
+      .remark-code, .remark-inline-code {
+        font-family: 'Ubuntu Mono', monospace;
+        background-color: #f8f8f8;
+        border-radius: 4px;
+        padding: 2px 5px;
+        color: #d63384; /* コードの色を少し目立たせる */
+      }
+      .remark-code {
+        padding: 1em;
+        line-height: 1.4;
+        border: 1px solid #e0e0e0;
+        color: #333;
+      }
+
+      a { color: #3498db; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+
+      ul, ol { margin-left: 1.5em; }
+      li { margin-bottom: 0.5em; }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1em;
+      }
+      th, td {
+        border: 1px solid #e0e0e0;
+        padding: 10px;
+        text-align: left;
+      }
+      th { background-color: #f8f8f8; }
+
+      /* 画像のスタイル調整 */
+      .remark-slide-content img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 1.5em auto;
+        border-radius: 4px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      }
+
+      /* タイトルスライド専用のスタイル */
+      .remark-slide-content.center.middle h1 {
+        font-size: 3em;
+        border-bottom: none;
+        margin-bottom: 20px;
+      }
+      .remark-slide-content.center.middle h2 {
+        font-size: 1.5em;
+        color: #7f8c8d;
+        margin-top: 0;
+      }
+      .remark-slide-content.center.middle img {
+        margin-top: 30px;
+        box-shadow: none;
+      }
+
+    </style>
+  </head>
+  <body>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script>
+      const slideshow = remark.create({
+        sourceUrl: 'README.md', /* MarkdownソースはREADME.mdを参照 */
+        ratio: '16:9', /* スライドの比率 */
+        highlightStyle: 'github', /* コードハイライトのスタイル */
+        highlightLines: true,
+        countIncrementalSlides: false
+      });
+    </script>
+  </body>
+</html>

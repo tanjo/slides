@@ -24,14 +24,14 @@ const slides = [
   {
     id: 'title',
     type: 'title',
-    title: 'メスガキと学ぶGitHub入門講座♡',
-    subtitle: 'GitHub もろくに使えないクソざこ♡おじさんのための講座',
+    title: 'メスガキと学ぶ GitHub 入門講座♡',
+    subtitle: 'GitHub もろくに使えないクソざこ♡のための講座',
     icon: <GithubIcon className="w-24 h-24 text-pink-500 mb-4 animate-bounce" />
   },
   {
     id: 'intro',
     type: 'dialogue',
-    title: '登場人物',
+    title: 'プロローグ',
     dialogues: [
       { speaker: 'mesugaki', text: 'は？まだGitとGitHubの違いもわかんないの？\nこの令和の時代に？ ほんとウケるんですけど〜♡ クソざこナメクジおじさん♡' },
       { speaker: 'ojisan', text: 'ご、ごめんよ…いつもZipで固めて「最新版_最終_本当の最終.zip」ってメールで送ってたから…' },
@@ -297,11 +297,6 @@ export default function App() {
       className="h-screen w-screen bg-pink-50 flex flex-col items-center justify-center font-sans overflow-hidden select-none"
       onClick={goToNext}
     >
-      {/* Background Decor */}
-      <div className="absolute top-10 left-10 text-pink-200 opacity-50"><Heart size={48} /></div>
-      <div className="absolute bottom-20 right-20 text-pink-200 opacity-50"><Heart size={64} /></div>
-      <div className="absolute top-1/4 right-10 text-purple-200 opacity-50"><GithubIcon size={56} /></div>
-
       <style>{`
         @keyframes fadeInUp {
           from { opacity: 0; transform: translateY(20px); }
@@ -322,7 +317,7 @@ export default function App() {
 
       {/* Slide Container */}
       <div 
-        className="w-full h-full max-w-6xl max-h-screen sm:max-h-[96vh] bg-white shadow-2xl rounded-none sm:rounded-3xl relative flex flex-col cursor-pointer border-0 sm:border-4 border-pink-200 sm:mx-4"
+        className="w-full h-full bg-white relative flex flex-col cursor-pointer"
         onClick={(e) => { e.stopPropagation(); goToNext(); }}
       >
         
@@ -346,12 +341,12 @@ export default function App() {
 
           {/* --- Dialogue Only Slide --- */}
           {slide.type === 'dialogue' && (
-            <div className="flex flex-col h-full w-full">
+            <div className="flex flex-col h-full w-full max-w-5xl mx-auto">
               <div className="flex items-center justify-center gap-2 sm:gap-4 mb-4 sm:mb-8 shrink-0">
                 {slide.icon}
                 <h2 className="text-2xl sm:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-2">{slide.title}</h2>
               </div>
-              <div className="flex-1 flex flex-col justify-center gap-3 sm:gap-6 w-full max-w-3xl mx-auto pb-4">
+              <div className="flex-1 flex flex-col justify-center gap-3 sm:gap-6 w-full pb-4">
                 {slide.dialogues?.map((d, i) => (
                   <div key={`${slide.id}-${i}`} style={{ animationDelay: `${i * 0.3}s` }} className="opacity-0 animate-fade-in-up">
                     {d.speaker === 'mesugaki' ? <MesugakiSpeechBubble text={d.text} /> : <OjisanSpeechBubble text={d.text} />}
@@ -363,13 +358,13 @@ export default function App() {
 
           {/* --- Content + Single Dialogue Slide --- */}
           {slide.type === 'content' && (
-            <div className="flex flex-col h-full w-full">
+            <div className="flex flex-col h-full w-full max-w-5xl mx-auto">
                <div className="flex items-center justify-center gap-2 sm:gap-4 mb-4 shrink-0">
                 {slide.icon}
                 <h2 className="text-2xl sm:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-2">{slide.title}</h2>
               </div>
               
-              <div className="flex-1 flex items-center justify-center w-full max-w-3xl mx-auto mb-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+              <div className="flex-1 flex items-center justify-center w-full mb-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
                 <div className="w-full bg-pink-50 p-4 sm:p-6 rounded-2xl border-2 border-pink-100 text-sm sm:text-base">
                   {slide.content}
                 </div>
@@ -388,13 +383,13 @@ export default function App() {
 
           {/* --- Interactive QA Slide (Gemini API) --- */}
           {slide.type === 'interactive' && (
-            <div className="flex flex-col h-full w-full cursor-default" onClick={(e) => e.stopPropagation()}>
+            <div className="flex flex-col h-full w-full max-w-5xl mx-auto cursor-default" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2 sm:mb-4 shrink-0">
                 {slide.icon}
                 <h2 className="text-2xl sm:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-2">{slide.title}</h2>
               </div>
               
-              <div className="flex-1 flex flex-col justify-center gap-2 sm:gap-4 w-full max-w-3xl mx-auto pb-4">
+              <div className="flex-1 flex flex-col justify-center gap-2 sm:gap-4 w-full pb-4">
                 <MesugakiSpeechBubble text={apiResponse || slide.dialogue.text} />
                 
                 <div className="flex flex-col gap-2 sm:gap-3 mt-2 bg-pink-50/80 p-3 sm:p-5 rounded-2xl border-2 border-pink-200 shadow-inner w-full animate-fade-in-up shrink-0" style={{ animationDelay: '0.3s' }}>
@@ -429,7 +424,7 @@ export default function App() {
 
            {/* --- Summary / Outro (uses title type but has dialogue) --- */}
            {slide.type === 'title' && slide.dialogue && (
-             <div className="mt-8 sm:mt-12 w-full max-w-3xl animate-fade-in-up pb-4" style={{ animationDelay: '0.6s' }}>
+             <div className="mt-8 sm:mt-12 w-full max-w-5xl mx-auto animate-fade-in-up pb-4" style={{ animationDelay: '0.6s' }}>
                 <MesugakiSpeechBubble text={slide.dialogue.text} />
              </div>
            )}

@@ -192,22 +192,22 @@ const OjisanIcon = () => (
 );
 
 const MesugakiSpeechBubble = ({ text }) => (
-  <div className="flex items-end gap-2 sm:gap-4 animate-fade-in-up w-full">
-    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 sm:border-4 border-pink-400 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-lg relative bg-pink-50">
+  <div className="flex items-end gap-1 xs:gap-2 sm:gap-4 animate-fade-in-up w-full">
+    <div className="w-10 h-10 xs:w-12 xs:h-12 sm:w-16 sm:h-16 rounded-full border-2 sm:border-4 border-pink-400 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-lg relative bg-pink-50">
       <MesugakiIcon />
     </div>
-    <div className="bg-pink-100 border-2 border-pink-300 p-3 sm:p-4 rounded-2xl rounded-bl-none shadow-md relative w-full">
-      <p className="text-sm sm:text-base text-gray-800 font-bold whitespace-pre-wrap leading-relaxed">{text}</p>
+    <div className="bg-pink-100 border-2 border-pink-300 p-2 xs:p-3 sm:p-4 rounded-2xl rounded-bl-none shadow-md relative w-full">
+      <p className="text-xs xs:text-sm sm:text-base text-gray-800 font-bold whitespace-pre-wrap leading-relaxed">{text}</p>
     </div>
   </div>
 );
 
 const OjisanSpeechBubble = ({ text }) => (
-  <div className="flex items-end gap-2 sm:gap-4 animate-fade-in-up justify-end w-full">
-    <div className="bg-blue-50 border-2 border-blue-200 p-3 sm:p-4 rounded-2xl rounded-br-none shadow-md relative w-full text-right">
-      <p className="text-sm sm:text-base text-gray-700 whitespace-pre-wrap leading-relaxed">{text}</p>
+  <div className="flex items-end gap-1 xs:gap-2 sm:gap-4 animate-fade-in-up justify-end w-full">
+    <div className="bg-blue-50 border-2 border-blue-200 p-2 xs:p-3 sm:p-4 rounded-2xl rounded-br-none shadow-md relative w-full text-right">
+      <p className="text-xs xs:text-sm sm:text-base text-gray-700 whitespace-pre-wrap leading-relaxed">{text}</p>
     </div>
-    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 sm:border-4 border-gray-400 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-lg relative bg-gray-50">
+    <div className="w-10 h-10 xs:w-12 xs:h-12 sm:w-16 sm:h-16 rounded-full border-2 sm:border-4 border-gray-400 flex items-center justify-center flex-shrink-0 overflow-hidden shadow-lg relative bg-gray-50">
       <OjisanIcon />
     </div>
   </div>
@@ -294,7 +294,7 @@ export default function App() {
 
   return (
     <div 
-      className="h-screen w-screen bg-pink-50 flex flex-col items-center justify-center font-sans overflow-hidden select-none"
+      className="min-h-screen min-w-full bg-pink-50 flex flex-col items-center justify-center font-sans overflow-hidden select-none"
       onClick={goToNext}
     >
       <style>{`
@@ -317,23 +317,21 @@ export default function App() {
 
       {/* Slide Container */}
       <div 
-        className="w-full h-full bg-white relative flex flex-col cursor-pointer"
+        className="w-full h-full max-w-[100vw] max-h-[100dvh] bg-white relative flex flex-col cursor-pointer"
         onClick={(e) => { e.stopPropagation(); goToNext(); }}
       >
-        
         {/* Progress Bar */}
         <div className="absolute top-0 left-0 h-2 bg-pink-500 transition-all duration-300 ease-out z-20" style={{ width: `${((currentSlideIndex + 1) / slides.length) * 100}%` }} />
 
-        <div className="flex-1 p-4 sm:p-8 md:p-10 flex flex-col justify-center items-center text-center relative z-10 w-full h-full overflow-y-auto overflow-x-hidden hide-scrollbar">
-          
+        <div className="flex-1 p-2 xs:p-3 sm:p-6 md:p-10 flex flex-col justify-center items-center text-center relative z-10 w-full h-full overflow-y-auto overflow-x-hidden hide-scrollbar">
           {/* --- Title Slide --- */}
           {slide.type === 'title' && (
-            <div className="animate-fade-in-up flex flex-col items-center w-full my-auto pb-4">
+            <div className="animate-fade-in-up flex flex-col items-center w-full my-auto pb-2 sm:pb-4">
               {slide.icon}
-              <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 mb-4 sm:mb-6 drop-shadow-sm leading-tight">
+              <h1 className="text-xl xs:text-2xl sm:text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 mb-2 sm:mb-6 drop-shadow-sm leading-tight">
                 {slide.title}
               </h1>
-              <p className="text-lg sm:text-2xl text-gray-600 font-bold bg-pink-100 px-4 sm:px-6 py-2 rounded-full shadow-inner inline-block">
+              <p className="text-base xs:text-lg sm:text-2xl text-gray-600 font-bold bg-pink-100 px-2 xs:px-4 sm:px-6 py-1 xs:py-2 rounded-full shadow-inner inline-block">
                 {slide.subtitle}
               </p>
             </div>
@@ -341,12 +339,12 @@ export default function App() {
 
           {/* --- Dialogue Only Slide --- */}
           {slide.type === 'dialogue' && (
-            <div className="flex flex-col h-full w-full max-w-5xl mx-auto">
-              <div className="flex items-center justify-center gap-2 sm:gap-4 mb-4 sm:mb-8 shrink-0">
+            <div className="flex flex-col h-full w-full max-w-[96vw] sm:max-w-4xl mx-auto">
+              <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-4 mb-2 sm:mb-8 shrink-0">
                 {slide.icon}
-                <h2 className="text-2xl sm:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-2">{slide.title}</h2>
+                <h2 className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-1 sm:pb-2">{slide.title}</h2>
               </div>
-              <div className="flex-1 flex flex-col justify-center gap-3 sm:gap-6 w-full pb-4">
+              <div className="flex-1 flex flex-col justify-center gap-2 xs:gap-3 sm:gap-6 w-full pb-2 sm:pb-4">
                 {slide.dialogues?.map((d, i) => (
                   <div key={`${slide.id}-${i}`} style={{ animationDelay: `${i * 0.3}s` }} className="opacity-0 animate-fade-in-up">
                     {d.speaker === 'mesugaki' ? <MesugakiSpeechBubble text={d.text} /> : <OjisanSpeechBubble text={d.text} />}
@@ -358,20 +356,19 @@ export default function App() {
 
           {/* --- Content + Single Dialogue Slide --- */}
           {slide.type === 'content' && (
-            <div className="flex flex-col h-full w-full max-w-5xl mx-auto">
-               <div className="flex items-center justify-center gap-2 sm:gap-4 mb-4 shrink-0">
+            <div className="flex flex-col h-full w-full max-w-[96vw] sm:max-w-4xl mx-auto">
+               <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-4 mb-2 sm:mb-4 shrink-0">
                 {slide.icon}
-                <h2 className="text-2xl sm:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-2">{slide.title}</h2>
+                <h2 className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-1 sm:pb-2">{slide.title}</h2>
               </div>
-              
-              <div className="flex-1 flex items-center justify-center w-full mb-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-                <div className="w-full bg-pink-50 p-4 sm:p-6 rounded-2xl border-2 border-pink-100 text-sm sm:text-base">
+              <div className="flex-1 flex items-center justify-center w-full mb-2 sm:mb-4 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                <div className="w-full bg-pink-50 p-2 xs:p-3 sm:p-6 rounded-2xl border-2 border-pink-100 text-xs xs:text-sm sm:text-base">
                   {slide.content}
                 </div>
               </div>
 
               {slide.dialogue && (
-                <div className="mt-auto animate-fade-in-up shrink-0 pb-4" style={{ animationDelay: '0.6s' }}>
+                <div className="mt-auto animate-fade-in-up shrink-0 pb-2 sm:pb-4" style={{ animationDelay: '0.6s' }}>
                    {slide.dialogue.speaker === 'mesugaki' 
                       ? <MesugakiSpeechBubble text={slide.dialogue.text} /> 
                       : <OjisanSpeechBubble text={slide.dialogue.text} />
@@ -383,18 +380,16 @@ export default function App() {
 
           {/* --- Interactive QA Slide (Gemini API) --- */}
           {slide.type === 'interactive' && (
-            <div className="flex flex-col h-full w-full max-w-5xl mx-auto cursor-default" onClick={(e) => e.stopPropagation()}>
-              <div className="flex items-center justify-center gap-2 sm:gap-4 mb-2 sm:mb-4 shrink-0">
+            <div className="flex flex-col h-full w-full max-w-[96vw] sm:max-w-4xl mx-auto cursor-default" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-4 mb-2 sm:mb-4 shrink-0">
                 {slide.icon}
-                <h2 className="text-2xl sm:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-2">{slide.title}</h2>
+                <h2 className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-1 sm:pb-2">{slide.title}</h2>
               </div>
-              
-              <div className="flex-1 flex flex-col justify-center gap-2 sm:gap-4 w-full pb-4">
+              <div className="flex-1 flex flex-col justify-center gap-1 xs:gap-2 sm:gap-4 w-full pb-2 sm:pb-4">
                 <MesugakiSpeechBubble text={apiResponse || slide.dialogue.text} />
-                
-                <div className="flex flex-col gap-2 sm:gap-3 mt-2 bg-pink-50/80 p-3 sm:p-5 rounded-2xl border-2 border-pink-200 shadow-inner w-full animate-fade-in-up shrink-0" style={{ animationDelay: '0.3s' }}>
+                <div className="flex flex-col gap-1 xs:gap-2 sm:gap-3 mt-1 xs:mt-2 bg-pink-50/80 p-2 xs:p-3 sm:p-5 rounded-2xl border-2 border-pink-200 shadow-inner w-full animate-fade-in-up shrink-0" style={{ animationDelay: '0.3s' }}>
                   <textarea 
-                    className="w-full p-3 sm:p-4 border-2 border-pink-200 rounded-xl resize-none focus:outline-none focus:ring-4 focus:ring-pink-300 bg-white text-gray-800 text-sm sm:text-base placeholder-pink-300"
+                    className="w-full p-2 xs:p-3 sm:p-4 border-2 border-pink-200 rounded-xl resize-none focus:outline-none focus:ring-4 focus:ring-pink-300 bg-white text-gray-800 text-xs xs:text-sm sm:text-base placeholder-pink-300"
                     rows="2"
                     placeholder="おじさんのクソみたいな質問や言い訳を入力してね♡"
                     value={inputText}
@@ -409,7 +404,7 @@ export default function App() {
                   />
                   <div className="flex justify-end">
                     <button 
-                      className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-2 sm:py-3 px-6 sm:px-8 rounded-full shadow-lg disabled:opacity-50 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-2 text-sm sm:text-base"
+                      className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 text-white font-bold py-1 xs:py-2 sm:py-3 px-4 xs:px-6 sm:px-8 rounded-full shadow-lg disabled:opacity-50 transition-all transform hover:scale-105 active:scale-95 flex items-center gap-1 xs:gap-2 text-xs xs:text-sm sm:text-base"
                       onClick={handleAskMesugaki}
                       disabled={isLoading || !inputText.trim()}
                     >
@@ -432,7 +427,7 @@ export default function App() {
         </div>
 
         {/* Slide Number */}
-        <div className="absolute bottom-2 sm:bottom-4 right-4 sm:right-6 text-pink-400 font-bold font-mono text-sm sm:text-base z-20">
+        <div className="absolute bottom-1 xs:bottom-2 sm:bottom-4 right-2 xs:right-4 sm:right-6 text-pink-400 font-bold font-mono text-xs xs:text-sm sm:text-base z-20">
           {currentSlideIndex + 1} / {slides.length}
         </div>
       </div>

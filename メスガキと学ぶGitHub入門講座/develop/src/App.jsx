@@ -107,10 +107,10 @@ const slides = [
     title: "クローン (Clone) してきなさい♡",
     content: (
       <div className="text-center space-y-4">
-        <div className="bg-gray-800 text-green-400 p-4 rounded-lg font-mono text-xl shadow-inner">
+        <div className="bg-gray-800 text-green-400 p-2 xs:p-3 sm:p-4 rounded-lg font-mono text-base xs:text-lg sm:text-xl shadow-inner break-all">
           $ git clone https://github.com/xxxx/yyyy.git
         </div>
-        <p className="text-lg">
+        <p className="text-base sm:text-lg">
           GitHubにあるリポジトリを、自分のPCに丸ごと持ってくる魔法の呪文だよ！
         </p>
       </div>
@@ -415,7 +415,7 @@ export default function App() {
 
       {/* Slide Container */}
       <div
-        className="w-full h-full max-w-[100vw] max-h-[100dvh] bg-white relative flex flex-col cursor-pointer"
+        className="w-full h-full max-w-[100vw] max-h-[100dvh] bg-white relative flex flex-col cursor-pointer min-h-[100dvh] sm:min-h-0"
         onClick={(e) => {
           e.stopPropagation();
           goToNext();
@@ -429,7 +429,7 @@ export default function App() {
           }}
         />
 
-        <div className="flex-1 p-2 xs:p-3 sm:p-6 md:p-10 flex flex-col justify-center items-center text-center relative z-10 w-full h-full overflow-y-auto overflow-x-hidden hide-scrollbar">
+        <div className="flex-1 p-2 xs:p-3 sm:p-6 md:p-10 flex flex-col justify-center items-center text-center relative z-10 w-full min-h-[calc(100dvh-2.5rem)] sm:min-h-0 overflow-y-auto overflow-x-hidden hide-scrollbar">
           {/* --- Title Slide --- */}
           {slide.type === "title" && (
             <div className="animate-fade-in-up flex flex-col items-center w-full my-auto pb-2 sm:pb-4">

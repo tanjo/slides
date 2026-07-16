@@ -30,7 +30,7 @@ class Server {
 module.exports = Server;
 
 if (require.main === module) {
-    const port = process.argv[2] || 3000;
+    const port = process.argv[2] || 50000;
     const server = new Server(port);
     server.start();
 }

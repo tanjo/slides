@@ -160,7 +160,7 @@ const slides = [
     id: "pull-request",
     type: "dialogue",
     title: "プルリク (Pull Request) ♡",
-    icon: <GitPullRequest className="w-16 h-16 text-pink-400 mx-auto mb-2" />,
+    icon: <GitPullRequest className="w-16 h-16 text-pink-400" />,
     dialogues: [
       {
         speaker: "mesugaki",
@@ -206,7 +206,7 @@ const slides = [
     id: "conflict-resolve",
     type: "dialogue",
     title: "コンフリクト解消♡",
-    icon: <GitMerge className="w-16 h-16 text-pink-400 mx-auto mb-2" />,
+    icon: <GitMerge className="w-16 h-16 text-pink-400" />,
     dialogues: [
       {
         speaker: "mesugaki",
@@ -242,7 +242,7 @@ const slides = [
     type: "interactive",
     title: "メスガキの特別わからせ質問コーナー♡",
     icon: (
-      <MessageCircle className="w-16 h-16 text-pink-400 mx-auto mb-2 animate-bounce" />
+      <MessageCircle className="w-16 h-16 text-pink-400 animate-bounce" />
     ),
     dialogue: {
       speaker: "mesugaki",
@@ -303,6 +303,15 @@ const OjisanSpeechBubble = ({ text }) => (
   </div>
 );
 
+const SlideHeader = ({ icon, title }) => (
+  <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-4 mb-2 sm:mb-4 shrink-0">
+    {icon}
+    <h2 className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-1 sm:pb-2">
+      {title}
+    </h2>
+  </div>
+);
+
 export default function App() {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const slide = slides[currentSlideIndex];
@@ -313,15 +322,15 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
 
   const goToNext = useCallback(() => {
-    setCurrentSlideIndex((prev) => Math.min(prev + 1, slides.length - 1));
-  }, []);
+    if (currentSlideIndex >= slides.length - 1) return;
+    setCurrentSlideIndex(currentSlideIndex + 1);
+    setApiResponse("");
+    setInputText("");
+  }, [currentSlideIndex]);
 
   const goToPrev = useCallback(() => {
-    setCurrentSlideIndex((prev) => Math.max(prev - 1, 0));
-  }, []);
-
-  // スライドが切り替わったらQAの入力をリセット
-  useEffect(() => {
+    if (currentSlideIndex <= 0) return;
+    setCurrentSlideIndex(currentSlideIndex - 1);
     setApiResponse("");
     setInputText("");
   }, [currentSlideIndex]);
@@ -380,7 +389,7 @@ export default function App() {
         responseText ||
         "なんかAPIの調子がおかしいみたい。おじさんの日頃の行いが悪いからじゃない？♡",
       );
-    } catch (error) {
+    } catch {
       setApiResponse(
         "通信エラーだよ、クソざこ回線おじさん♡ ネット環境くらいまともにしなよ♡",
       );
@@ -415,7 +424,7 @@ export default function App() {
 
       {/* Slide Container */}
       <div
-        className="w-full h-full max-w-[100vw] max-h-[100dvh] bg-white relative flex flex-col cursor-pointer min-h-[100dvh] sm:min-h-0"
+        className="w-full h-full max-w-[100vw] max-h-[100dvh] bg-white relative flex flex-col cursor-pointer min-h-[100dvh]"
         onClick={(e) => {
           e.stopPropagation();
           goToNext();
@@ -429,10 +438,12 @@ export default function App() {
           }}
         />
 
-        <div className="flex-1 p-2 xs:p-3 sm:p-6 md:p-10 flex flex-col justify-center items-center text-center relative z-10 w-full min-h-[calc(100dvh-2.5rem)] sm:min-h-0 overflow-y-auto overflow-x-hidden hide-scrollbar">
+        <div className="flex-1 p-2 xs:p-3 sm:p-6 md:p-10 flex flex-col justify-center items-center text-center relative z-10 w-full min-h-[calc(100dvh-2.5rem)] overflow-y-auto overflow-x-hidden hide-scrollbar">
           {/* --- Title Slide --- */}
           {slide.type === "title" && (
-            <div className="animate-fade-in-up flex flex-col items-center w-full my-auto pb-2 sm:pb-4">
+            <div
+              className={`animate-fade-in-up flex flex-col items-center w-full pb-2 sm:pb-4 ${slide.dialogue ? "" : "my-auto"}`}
+            >
               {slide.icon}
               <h1 className="text-xl xs:text-2xl sm:text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-purple-600 mb-2 sm:mb-6 drop-shadow-sm leading-tight">
                 {slide.title}
@@ -446,12 +457,7 @@ export default function App() {
           {/* --- Dialogue Only Slide --- */}
           {slide.type === "dialogue" && (
             <div className="flex flex-col h-full w-full max-w-[96vw] sm:max-w-4xl mx-auto">
-              <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-4 mb-2 sm:mb-8 shrink-0">
-                {slide.icon}
-                <h2 className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-1 sm:pb-2">
-                  {slide.title}
-                </h2>
-              </div>
+              <SlideHeader icon={slide.icon} title={slide.title} />
               <div className="flex-1 flex flex-col justify-center gap-2 xs:gap-3 sm:gap-6 w-full pb-2 sm:pb-4">
                 {slide.dialogues?.map((d, i) => (
                   <div
@@ -473,14 +479,10 @@ export default function App() {
           {/* --- Content + Single Dialogue Slide --- */}
           {slide.type === "content" && (
             <div className="flex flex-col h-full w-full max-w-[96vw] sm:max-w-4xl mx-auto">
-              <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-4 mb-2 sm:mb-4 shrink-0">
-                {slide.icon}
-                <h2 className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-1 sm:pb-2">
-                  {slide.title}
-                </h2>
-              </div>
+              <SlideHeader icon={slide.icon} title={slide.title} />
               <div
-                className="flex-1 flex items-center justify-center w-full mb-2 sm:mb-4 animate-fade-in-up"
+                key={slide.id}
+                className="flex-1 flex items-center justify-center w-full mb-2 sm:mb-4 opacity-0 animate-fade-in-up"
                 style={{ animationDelay: "0.2s" }}
               >
                 <div className="w-full bg-pink-50 p-2 xs:p-3 sm:p-6 rounded-2xl border-2 border-pink-100 text-xs xs:text-sm sm:text-base">
@@ -490,7 +492,7 @@ export default function App() {
 
               {slide.dialogue && (
                 <div
-                  className="mt-auto animate-fade-in-up shrink-0 pb-2 sm:pb-4"
+                  className="mt-auto opacity-0 animate-fade-in-up shrink-0 pb-2 sm:pb-4"
                   style={{ animationDelay: "0.6s" }}
                 >
                   {slide.dialogue.speaker === "mesugaki" ? (
@@ -509,18 +511,13 @@ export default function App() {
               className="flex flex-col h-full w-full max-w-[96vw] sm:max-w-4xl mx-auto cursor-default"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center justify-center gap-1 xs:gap-2 sm:gap-4 mb-2 sm:mb-4 shrink-0">
-                {slide.icon}
-                <h2 className="text-lg xs:text-xl sm:text-3xl md:text-4xl font-bold text-pink-600 border-b-4 border-pink-300 pb-1 sm:pb-2">
-                  {slide.title}
-                </h2>
-              </div>
+              <SlideHeader icon={slide.icon} title={slide.title} />
               <div className="flex-1 flex flex-col justify-center gap-1 xs:gap-2 sm:gap-4 w-full pb-2 sm:pb-4">
                 <MesugakiSpeechBubble
                   text={apiResponse || slide.dialogue.text}
                 />
                 <div
-                  className="flex flex-col gap-1 xs:gap-2 sm:gap-3 mt-1 xs:mt-2 bg-pink-50/80 p-2 xs:p-3 sm:p-5 rounded-2xl border-2 border-pink-200 shadow-inner w-full animate-fade-in-up shrink-0"
+                  className="flex flex-col gap-1 xs:gap-2 sm:gap-3 mt-1 xs:mt-2 bg-pink-50/80 p-2 xs:p-3 sm:p-5 rounded-2xl border-2 border-pink-200 shadow-inner w-full opacity-0 animate-fade-in-up shrink-0"
                   style={{ animationDelay: "0.3s" }}
                 >
                   <textarea
@@ -555,7 +552,7 @@ export default function App() {
           {/* --- Summary / Outro (uses title type but has dialogue) --- */}
           {slide.type === "title" && slide.dialogue && (
             <div
-              className="mt-8 sm:mt-12 w-full max-w-5xl mx-auto animate-fade-in-up pb-4"
+              className="mt-8 sm:mt-12 w-full max-w-5xl mx-auto opacity-0 animate-fade-in-up pb-4"
               style={{ animationDelay: "0.6s" }}
             >
               <MesugakiSpeechBubble text={slide.dialogue.text} />
